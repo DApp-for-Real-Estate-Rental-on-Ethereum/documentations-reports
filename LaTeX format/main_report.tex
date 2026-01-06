@@ -1,0 +1,1110 @@
+\documentclass[12pt,a4paper]{report}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel} % Changed to French
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{makecell}
+
+
+% TikZ Packages
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning, fit, calc, shadows, backgrounds, shapes.symbols}
+
+% TikZ Styles
+\tikzset{
+    basicbox/.style = {rectangle, draw=black, fill=white, thick, text width=3cm, align=center, minimum height=1.5cm, drop shadow},
+    microservice/.style = {rectangle, draw=blue!60, fill=blue!5, thick, text width=2.2cm, align=center, rounded corners, minimum height=1.2cm, drop shadow, font=\footnotesize},
+    ai_service/.style = {rectangle, draw=purple!60, fill=purple!5, thick, text width=2.2cm, align=center, rounded corners, minimum height=1.2cm, drop shadow, font=\footnotesize},
+    database/.style = {cylinder, cylinder uses custom fill, cylinder body fill=gray!20, cylinder end fill=gray!10, shape border rotate=90, aspect=0.25, draw=black, thick, text width=1.2cm, align=center, minimum height=1.2cm, font=\scriptsize},
+    blockchain/.style = {rectangle, draw=orange!80, fill=orange!10, thick, text width=2.5cm, align=center, minimum height=1.5cm, drop shadow},
+    gateway/.style = {rectangle, draw=red!60, fill=red!5, thick, text width=2.5cm, align=center, rounded corners, minimum height=4cm, drop shadow},
+    client/.style = {rectangle, draw=green!60!black, fill=green!5, thick, text width=2.5cm, align=center, minimum height=2cm, drop shadow},
+    cloud_node/.style = {cloud, cloud puffs=10.0, cloud ignores aspect, draw=gray, fill=gray!10, thick, text width=1.5cm, align=center, minimum height=1cm, drop shadow, font=\footnotesize},
+    messagebus/.style = {rectangle, draw=orange!60, fill=orange!5, thick, text width=12cm, align=center, rounded corners, minimum height=0.8cm, drop shadow, font=\footnotesize\bfseries},
+    line/.style = {draw, thick, -latex, shorten >=2pt},
+    dbl/.style = {draw, thick, latex-latex, shorten >=2pt, shorten <=2pt},
+    dashed_line/.style = {draw, thick, dashed, -latex, shorten >=2pt}
+}
+
+% Page Geometry
+\geometry{top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}
+
+% Header and Footer
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+% Header
+\fancyfoot[L]{\small Decentralized Microservices App for Real Estate Rental on Ethereum Blockchain}
+
+% Footer
+\fancyfoot[R]{\thepage}
+
+% Footer line
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0pt}
+
+% Colors
+\definecolor{primaryBlue}{RGB}{0, 102, 204}
+\definecolor{codeGray}{rgb}{0.5,0.5,0.5}
+
+% Code Listing Configuration
+\lstset{
+    language=Java,
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{primaryBlue}\bfseries,
+    commentstyle=\color{codeGray},
+    numbers=left,
+    numberstyle=\tiny\color{codeGray},
+    stepnumber=1,
+    frame=single,
+    breaklines=true
+}
+
+% Hyperlink Setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=primaryBlue,
+}
+
+\begin{document}
+
+%---------------------------------
+% Page de garde – Projet Blockchain & Microservices
+%---------------------------------
+\begin{titlepage}
+    \centering
+
+    % --- Logos ---
+    \makebox[\textwidth][s]{%
+        \includegraphics[height=2.5cm]{images/logo_right.png}\hfill
+        \includegraphics[height=2.6cm]{images/logo_left.png}
+    }
+
+    \vspace{1.6cm}
+
+    % --- Informations institutionnelles ---
+    {\large \textbf{Université Abdelmalek Essaâdi}}\\
+    {\large \textbf{Faculté des Sciences et Techniques de Tanger}}\\
+    {\large \textbf{Département Génie Informatique}}\\
+
+    \vspace{1.2cm}
+
+    % --- Titre encadré ---
+    \rule{\linewidth}{0.6mm}\\[0.4cm]
+    {\huge\textbf{Decentralized Microservices App}}\\[0.2cm]
+    {\huge\textbf{for Real Estate Rental}}\\[0.3cm]
+    {\Large \textit{Based on Ethereum Blockchain}}\\[0.4cm]
+    \rule{\linewidth}{0.5mm}
+
+    \vspace{0.9cm}
+
+    % --- Illustration centrale ---
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{images/logo.png}
+    \end{figure}
+
+    \vspace{0.6cm}
+    
+    % --- Infos Réalisé par / Encadré par ---
+    \noindent
+    \begin{minipage}[t]{0.48\textwidth}
+        \raggedright
+        {\large \textbf{Réalisé par :}}\\[0.4cm]
+        \normalsize
+        El Gorrim Mohamed\\
+        Kchibal Ismail\\
+        Mohand Omar Moussa\\
+        Essalhi Salma\\
+        El Azzouzi Achraf
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \raggedleft
+        {\large \textbf{Encadré par :}}\\[0.4cm]
+        \normalsize
+        M. Lotfi El Aachak
+    \end{minipage}
+
+    \vspace{2.2cm}
+
+    % --- Bas de page ---
+    {\large Cycle Ingénieur – Logiciels et Systemes Intelligents}\\[0.3cm]
+    {\large Année Universitaire 2025–2026}\\[0.4cm]
+
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+% --- CHAPTER 1: INTRODUCTION ---
+\chapter{Introduction}
+
+\section{Introduction Générale}
+L'industrie immobilière traditionnelle est souvent entravée par des processus lents, des coûts d'intermédiation élevés et un manque de transparence. Ce projet, intitulé \textbf{Decentralized Real Estate Rental dApp}, propose une solution de rupture en tirant parti de la technologie \textbf{Blockchain} pour réinventer la location immobilière.
+
+Il s'agit d'une plateforme \textbf{Peer-to-Peer (P2P)} qui permet aux propriétaires (\textit{Hosts}) et aux locataires (\textit{Tenants}) d'interagir directement via des \textbf{Smart Contracts} sur le réseau \textbf{Ethereum}. Cette approche "Trustless" garantit que les termes du contrat sont exécutés automatiquement, sécurisant ainsi les dépôts de garantie et les paiements sans nécessiter de tiers de confiance.
+
+Le système est construit sur une architecture \textbf{Microservices} moderne, intégrant des technologies de pointe telles que \textbf{Spring Boot} pour le backend, \textbf{Next.js} pour le frontend, et une infrastructure \textbf{Cloud Native} orchestrée par \textbf{Kubernetes} sur \textbf{AWS}. De plus, l'intégration de modules d'\textbf{Artificial Intelligence} optimise l'expérience utilisateur grâce à la tarification dynamique et l'analyse de risque.
+
+\section{Composition de l'Équipe}
+La réussite de ce projet complexe repose sur une équipe multidisciplinaire de 5 ingénieurs, chacun expert dans son domaine technologique (\textit{Backend, Frontend, Blockchain, DevOps / AI \& Data, Cloud}).
+
+\newpage
+
+\renewcommand{\arraystretch}{2}
+
+\begin{center}
+\begin{longtable}{|
+    >{\centering\arraybackslash}m{3cm} |
+    m{5cm} |
+    m{7.5cm} |
+}
+\hline
+\textbf{Photo} & \textbf{Membre \& Rôle} & \textbf{Responsabilités Clés} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{Photo} & \textbf{Membre \& Rôle} & \textbf{Responsabilités Clés} \\
+\hline
+\endhead
+
+%------------------- Achraf -------------------
+\centering
+\includegraphics[width=2.5cm,height=2cm,keepaspectratio]{images/achraf.jpeg}
+&
+\makecell[l]{\textbf{El Azzouzi Achraf}\\ \textit{Backend Engineer}}
+&
+\textbf{Core Development} : Conception et implémentation des microservices avec \textbf{Spring Boot 3}. \newline
+\textbf{API Design} : Création d’APIs RESTful sécurisées et communication inter-services via \textbf{RabbitMQ}. \newline
+\textbf{Data Layer} : Modélisation de la base de données \textbf{PostgreSQL} et intégration Hibernate. \\
+\hline
+
+%------------------- Salma -------------------
+\centering
+\includegraphics[width=2.5cm,height=2cm,keepaspectratio]{images/salma.jpeg}
+&
+\makecell[l]{\textbf{Essalhi Salma}\\ \textit{Frontend Engineer}}
+&
+\textbf{UX/UI Design} : Développement d’une interface utilisateur réactive avec \textbf{Next.js} et \textbf{Tailwind CSS}. \newline
+\textbf{Web3 Integration} : Connexion des wallets (MetaMask) et interaction avec les smart contracts via \textbf{Ethers.js}. \newline
+\textbf{Mapping} : Intégration de cartes interactives pour la localisation des biens. \\
+\hline
+
+%------------------- Moussa -------------------
+\centering
+\includegraphics[width=2.5cm,height=2cm,keepaspectratio]{images/moussa.jpeg}
+&
+\makecell[l]{\textbf{Mohand Omar Moussa}\\ \textit{Blockchain Engineer}}
+&
+\textbf{Smart Contracts} : Développement en \textbf{Solidity} des contrats de location et d’escrow. \newline
+\textbf{Testing \& Security} : Tests unitaires avec \textbf{Hardhat} et audit de sécurité avec \textbf{Slither}. \newline
+\textbf{Deployment} : Gestion des migrations sur les réseaux de test (Testnets). \\
+\hline
+
+%------------------- Mohamed -------------------
+\centering
+\includegraphics[width=2.5cm,height=2cm,keepaspectratio]{images/mohamed.jpg}
+&
+\makecell[l]{\textbf{El Gorrim Mohamed}\\ \textit{DevOps / AI Engineer}}
+&
+\textbf{CI/CD} : Automatisation des pipelines de déploiement avec \textbf{Jenkins} et \textbf{Docker}. \newline
+\textbf{Orchestration} : Configuration et gestion des clusters \textbf{Kubernetes (K8s)}. \newline
+\textbf{AI Models} : Développement de modèles de \textit{Machine Learning} pour le \textit{Tenant Risk Scoring} et le \textit{Dynamic Pricing Suggestion}. \\
+\hline
+
+%------------------- Ismail -------------------
+\centering
+\includegraphics[width=2.5cm,height=2cm,keepaspectratio]{images/kchibal.jpeg}
+&
+\makecell[l]{\textbf{Kchibal Ismail}\\ \textit{Cloud Engineer}}
+&
+\textbf{IaC} : Provisionnement de l’infrastructure \textbf{AWS} via \textbf{Terraform}. \newline
+\textbf{Networking} : Configuration sécurisée du VPC, des subnets et des load balancers. \newline
+\textbf{Storage} : Gestion du stockage \textbf{S3} et des registres \textbf{ECR}. \\
+\hline
+
+\end{longtable}
+\end{center}
+    
+% --- CHAPTER 2: ARCHITECTURE ---
+\chapter{Architecture du Système}
+
+\section{Conception Architecturale}
+Pour répondre aux exigences de scalabilité, de résilience et de sécurité de la plateforme, nous avons adopté une **Architecture Microservices** stricte. Contrairement à une approche monolithique, cette stratégie permet de découpler les fonctionnalités métier en services autonomes, chacun déployable et maintenable indépendamment.
+
+\subsection{Diagramme d'Architecture Globale}
+L'architecture repose sur un point d'entrée unique qui orchestre les échanges entre les clients (Web/Mobile) et les services backend.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}[node distance=1.5cm]
+        % Nodes - Frontend & Gateway
+        \node (client) [client] {Frontend\\(Next.js)};
+        \node (gateway) [gateway, right=2cm of client] {API Gateway\\(Spring Cloud)};
+        
+        % Nodes - Microservices Row 1
+        \node (usersvc) [microservice, right=3cm of gateway, yshift=2.5cm] {User Service};
+        \node (propsvc) [microservice, below=0.5cm of usersvc] {Property Service};
+        \node (booksvc) [microservice, below=0.5cm of propsvc] {Booking Service};
+        
+        % Nodes - Microservices Row 2
+        \node (paymentsvc) [microservice, right=1cm of usersvc] {Payment Service};
+        \node (notifsvc) [microservice, below=0.5cm of paymentsvc] {Notification Svc};
+        \node (reclassvc) [microservice, below=0.5cm of notifsvc] {Reclamation Svc};
+        
+        % Nodes - Special Services
+        \node (blockchainsvc) [microservice, below=0.5cm of booksvc] {Blockchain Svc};
+        \node (aisvc) [ai_service, below=0.5cm of reclassvc] {AI Service\\(Python/FastAPI)};
+        
+        % Message Bus
+        \node (rabbitmq) [messagebus, below=1cm of blockchainsvc, xshift=1.5cm] {RabbitMQ Event Bus (Async Communication)};
+
+        % Data Layer
+        \node (db) [database, right=2cm of paymentsvc] {Shared\\DB Layer};
+        \node (s3) [cloud_node, right=2cm of paymentsvc, yshift=2cm] {AWS S3\\Images};
+        \node (ethereum) [blockchain, below=1.5cm of rabbitmq] {Ethereum Blockchain\\(Testnet/Mainnet)};
+        
+        % Edges - Sync Communication
+        \path [dbl] (client) -- node[above, font=\scriptsize]{REST/JSON} (gateway);
+        \path [line] (gateway) -- (usersvc.west);
+        \path [line] (gateway) -- (propsvc.west);
+        \path [line] (gateway) -- (booksvc.west);
+        \path [line] (gateway) -- (paymentsvc.west);
+        \path [line] (gateway) -- (notifsvc.west);
+        \path [line] (gateway) -- (reclassvc.west);
+        \path [line] (gateway) -- (blockchainsvc.west);
+        
+        % Edges - Msg Bus
+        \path [dbl] (usersvc) -- (rabbitmq);
+        \path [dbl] (propsvc) -- (rabbitmq);
+        \path [dbl] (booksvc) -- (rabbitmq);
+        \path [dbl] (paymentsvc) -- (rabbitmq);
+        \path [dbl] (notifsvc) -- (rabbitmq);
+        \path [dbl] (blockchainsvc) -- (rabbitmq);
+        
+        % Edges - Data
+        \path [dbl] (usersvc) -- (db);
+        \path [dbl] (propsvc) -- (db);
+        \path [dbl] (booksvc) -- (db);
+        \path [dashed_line] (aisvc) -- node[above, font=\scriptsize]{Read Only} (db);
+        \path [line] (propsvc) -- (s3);
+        
+        % Edges - Blockchain
+        \path [dbl] (blockchainsvc) -- (ethereum);
+        \path [dbl] (client.south) |- ++(0,-7) -| node[near start, below, font=\scriptsize]{Web3 Provider} (ethereum.west);
+
+        % Backgrounds
+        \begin{scope}[on background layer]
+            \node [fit=(usersvc) (propsvc) (booksvc) (paymentsvc) (aisvc), fill=blue!5, rounded corners, draw=blue!20, label=above:\textbf{Backend Microservices}] {};
+        \end{scope}
+    \end{tikzpicture}
+    }
+    \caption{Architecture Microservices Complète avec Flux de Communication}
+    \label{fig:architecture}
+\end{figure}
+
+L'architecture se décompose en quatre couches principales :
+
+\begin{enumerate}
+    \item \textbf{Client Layer (Frontend)} : 
+    Développée en Next.js, cette couche gère l'interface utilisateur. Elle est "stateless" et communique avec le backend exclusivement via des appels API REST sécurisés. Elle intègre également la librairie Ethers.js pour interagir directement avec la Blockchain Ethereum (Web3).
+
+    \item \textbf{Gateway Layer (API Gateway)} :
+    Basée sur Spring Cloud Gateway, elle agit comme un "Reverse Proxy" intelligent.
+    \begin{itemize}
+        \item \textbf{Routing Dynamique} : Redirection des requêtes (ex: \texttt{/api/v1/properties/} $\rightarrow$ \texttt{property-service}).
+        \item \textbf{Sécurité Centralisée} : Validation des JWT avant de transmettre la requête.
+        \item \textbf{Cross-Cutting Concerns} : CORS, Rate Limiting et Logging centralisé.
+    \end{itemize}
+
+    \item \textbf{Business Layer (Microservices)} :
+    Services isolés implémentant la logique métier. Ils communiquent de manière :
+    \begin{itemize}
+        \item \textbf{Synchrone} : Appels HTTP via \textit{OpenFeign} pour les opérations bloquantes (ex: vérifier l'existence d'un utilisateur lors d'une réservation).
+        \item \textbf{Asynchrone} : Échange d'événements via \textbf{RabbitMQ} pour les tâches de fond (ex: envoi de notification après paiement).
+    \end{itemize}
+
+    \item \textbf{Persistence Layer} :
+    Approche Polyglotte pour le stockage de données :
+    \begin{itemize}
+        \item \textbf{PostgreSQL} : Données relationnelles structurées (utilisateurs, réservations). Chaque microservice possède son propre schéma logique ("Database-per-Service").
+        \item \textbf{AWS S3} : Stockage d'objets (BLOB) pour les médias (photos des biens).
+        \item \textbf{Blockchain Ethereum} : "Ledger" immuable pour les contrats de location et l'historique des transactions.
+    \end{itemize}
+\end{enumerate}
+
+\section{Modèle de Données (Data Modeling)}
+Le schéma de base de données a été conçu pour garantir l'intégrité des transactions immobilières tout en restant flexible.
+
+\subsection{Diagramme de Classes (UML)}
+Le diagramme suivant illustre les relations entre les entités persistantes du système.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance=1cm]
+        % Entities
+        \node (user) [basicbox, text width=3.5cm] {\textbf{User} \\ \footnotesize id, email, password, role, wallet\_address};
+        
+        \node (property) [basicbox, text width=3.5cm, right=3cm of user] {\textbf{Property} \\ \footnotesize id, title, price, address\_id, owner\_id};
+        
+        \node (booking) [basicbox, text width=3.5cm, below=2cm of property] {\textbf{Booking} \\ \footnotesize id, check\_in, check\_out, total\_price, status, tx\_hash};
+        
+        \node (reclamation) [basicbox, text width=3.5cm, below=2cm of user] {\textbf{Reclamation} \\ \footnotesize id, severity, status, booking\_id};
+        
+        % Relationships
+        \path [line] (user) -- node[above]{\footnotesize Owns (1:N)} (property);
+        \path [line] (user) -- node[left]{\footnotesize Makes (1:N)} (booking);
+        \path [line] (property) -- node[right]{\footnotesize Has (1:N)} (booking);
+        \path [line] (booking) -- node[above]{\footnotesize Subject of (1:N)} (reclamation);
+        \path [line] (user) -- node[left]{\footnotesize files (1:N)} (reclamation);
+        
+    \end{tikzpicture}
+    \caption{Diagramme de Classes Simplifié (Entités Clés)}
+    \label{fig:class_diagram}
+\end{figure}
+
+\subsection{Analyse des Entités Clés}
+
+\subsubsection{1. Gestion des Utilisateurs (\texttt{users})}
+L'entité \texttt{User} est centrale. Elle utilise une stratégie d'héritage (ou de rôles) pour distinguer \textbf{Tenants} et \textbf{Hosts}.
+\begin{itemize}
+    \item \textbf{Attributs} : \texttt{id}, \texttt{email}, \texttt{wallet\_address} (lien Web3), \texttt{is\_verified}.
+    \item \textbf{Sécurité} : Les mots de passe sont hashés (BCrypt) et jamais stockés en clair.
+\end{itemize}
+
+\subsubsection{2. Gestion Immobilière (\texttt{properties})}
+Cette entité stocke les caractéristiques des biens.
+\begin{itemize}
+    \item \textbf{Relation} : \texttt{One-to-Many} avec \texttt{property\_images} (plusieurs photos par bien).
+    \item \textbf{Localisation} : Liée à une table \texttt{addresses} contenant les coordonnées GPS (\texttt{latitude}, \texttt{longitude}) pour la carte interactive.
+    \item \textbf{Disponibilité} : Relation avec \texttt{availabilities} pour gérer le calendrier.
+\end{itemize}
+
+\subsubsection{3. Réservations et Transactions (\texttt{bookings})}
+C'est l'entité pivot du système.
+\begin{itemize}
+    \item \textbf{Cycle de Vie} : Géré par un champ \texttt{status} (enum: \texttt{PENDING}, \texttt{ACCEPTED}, \texttt{PAID}, \texttt{COMPLETED}, \texttt{CANCELLED}).
+    \item \textbf{Blockchain Link} : Le champ \texttt{on\_chain\_tx\_hash} stocke la référence du Smart Contract déployé pour cette réservation.
+    \item \textbf{Contraintes} : Clés étrangères strictes vers \texttt{users} (locataire) et \texttt{properties}.
+\end{itemize}
+
+\subsubsection{4. Gestion des Litiges (\texttt{reclamations})}
+Permet de traiter les conflits post-séjour.
+\begin{itemize}
+    \item \textbf{Preuves} : Relation \texttt{One-to-Many} avec \texttt{reclamation\_attachments} pour stocker les photos/preuves.
+    \item \textbf{Workflow} : Statuts \texttt{OPEN}, \texttt{IN\_REVIEW}, \texttt{RESOLVED}.
+\end{itemize}
+
+% --- CHAPTER 3: MICROSERVICES DEVELOPMENT ---
+\chapter{Microservices Backend}
+
+Le backend constitue le noyau transactionnel de la plateforme \textit{Derent}. Il a été conçu pour être modulaire, résilient et hautement scalable, en suivant strictement les principes de l'architecture Microservices et de la méthodologie \textit{12-Factor App}.
+
+Chaque service est une unité autonome, responsable d'un domaine métier spécifique (Bounded Context), possédant sa propre base de données pour garantir un couplage faible et une forte cohésion.
+
+\section{Choix Technologiques (Tech Stack)}
+Pour assurer robustesse et maintenabilité, nous avons sélectionné la stack technique suivante :
+
+\begin{itemize}
+    \item \textbf{Langage \& Framework} : \textbf{Java 17} (LTS) avec \textbf{Spring Boot 3.3}. Ce choix offre un excellent écosystème, une sécurité mature et une intégration native avec le Cloud.
+    \item \textbf{Build Tool} : \textbf{Maven} pour la gestion des dépendances et du cycle de vie des projets (Multi-module).
+    \item \textbf{Base de Données} : \textbf{PostgreSQL 15} pour la persistance relationnelle, avec \textbf{Hibernate/JPA} comme ORM.
+    \item \textbf{Migration} : Les scripts SQL sont gérés par le mode \texttt{ddl-auto: update} en développement, mais prévus pour être gérés par \textbf{Liquibase} en production.
+    \item \textbf{Communication} :
+    \begin{itemize}
+        \item Synchrone : \textbf{Spring Cloud OpenFeign} pour les appels REST déclaratifs entre services.
+        \item Asynchrone : \textbf{RabbitMQ} pour l'échange de messages et le découplage événementiel.
+    \end{itemize}
+    \item \textbf{Utilitaires} : \textbf{Lombok} (réduction du boilerplate), \textbf{MapStruct} (mapping DTO/Entity performant), \textbf{Spring Actuator} (monitoring).
+\end{itemize}
+
+\section{Architecture Interne des Microservices}
+Chaque microservice suit une \textbf{Architecture en Couches} (inspirée de l'Architecture Hexagonale) pour séparer clairement les responsabilités :
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance=1.5cm]
+        \node (controller) [basicbox, fill=green!10] {\textbf{Controller Layer}\\(REST API)};
+        \node (service) [basicbox, fill=blue!10, below=1cm of controller] {\textbf{Service Layer}\\(Business Logic)};
+        \node (repository) [basicbox, fill=orange!10, below=1cm of service] {\textbf{Repository Layer}\\(Data Access)};
+        \node (db) [database, right=2cm of repository, shape border rotate=90] {DB};
+        
+        \path [line] (controller) -- node[right]{\footnotesize DTO $\rightarrow$ Entity} (service);
+        \path [line] (service) -- (repository);
+        \path [dbl] (repository) -- (db);
+    \end{tikzpicture}
+    \caption{Architecture en couches adoptée pour chaque Microservice}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Controller} : Expose les endpoints REST, gère la validation des entrées (`@Valid`) et renvoie les réponses HTTP standardisées (`ResponseEntity`).
+    \item \textbf{Service} : Contient la logique métier pure (ex: calculs, vérifications, appels externes). C'est la seule couche transactionnelle (`@Transactional`).
+    \item \textbf{Repository} : Interface étendant `JpaRepository` pour l'accès aux données.
+    \item \textbf{DTO (Data Transfer Object)} : Objets simples pour transférer les données entre le client et le serveur, évitant d'exposer directement les entités JPA.
+\end{itemize}
+
+\section{Détails des Microservices Clés}
+
+\subsection{1. User Service (Gestion d'Identité)}
+Ce service est le gardien des comptes utilisateurs.
+\begin{itemize}
+    \item \textbf{Responsabilités} : Inscription, Authentification, Gestion de profil via \textbf{JWT}.
+    \item \textbf{Logique Spécifique} : Il intègre une validation Web3 pour associer un portefeuille Ethereum (`wallet\_address`) à un compte classique. Cela permet une authentification hybride (Web2 + Web3).
+    \item \textbf{Sécurité} : Les mots de passe sont hashés avec \textbf{BCrypt} avant stockage.
+\end{itemize}
+
+\subsection{2. Property Service (Gestion Immobilière)}
+Le cœur du catalogue de la plateforme.
+\begin{itemize}
+    \item \textbf{Fonctionnalités} : CRUD des propriétés, recherche par filtres (Ville, Prix, Date).
+    \item \textbf{Stockage S3} : Lorsqu'un utilisateur upload une image, le service génère une URL présignée ou stocke le fichier directement sur \textbf{AWS S3} et sauvegarde l'URL en base.
+    \item \textbf{Intégration} : Publie un événement `property.created` écouté par le service IA pour l'analyse de prix.
+\end{itemize}
+
+\subsection{3. Booking Service (Réservations)}
+L'orchestrateur des transactions. Il gère un cycle de vie complexe :
+\begin{enumerate}
+    \item \textbf{Pending} : Création par le locataire. Vérification synchrone de la disponibilité (appel `PropertyService`).
+    \item \textbf{Accepted/Rejected} : Validation par l'hôte.
+    \item \textbf{Payment Pending} : Attente du paiement initial.
+    \item \textbf{Confirmed} : Paiement reçu + Smart Contract déployé (appel asynchrone `BlockchainService`).
+\end{enumerate}
+
+\subsection{4. Blockchain Service (Middleware Web3)}
+Ce service agit comme une passerelle sécurisée vers le réseau Ethereum.
+\begin{itemize}
+    \item \textbf{Technologie} : Utilise la librairie \textbf{Web3j} pour interagir avec les nœuds Ethereum (via Infura/Alchemy ou Geth local).
+    \item \textbf{Rôle} : Déploie les Smart Contracts de location (`RentalAgreement`) et surveille les événements on-chain (`DepositPaid`, `FundsReleased`).
+    \item \textbf{Sécurité} : Il gère les clés privées du système (Server Wallet) stockées de manière sécurisée (Vault ou Variables d'Env chiffrées).
+\end{itemize}
+
+\subsection{5. AI Service (Intelligence Artificielle)}
+Bien que développé en Python (FastAPI) pour l'accès aux librairies Data Science (Scikit-learn, Pandas), il est pleinement intégré à l'architecture.
+\begin{itemize}
+    \item \textbf{Communication} : Il expose des API REST consommées par le Gateway.
+    \item \textbf{Fonctions} :
+    \begin{itemize}
+        \item \textit{Price Prediction} : Suggère un prix à la création d'une annonce.
+        \item \textit{Tenant Risk Score} : Analyse l'historique d'un locataire.
+    \end{itemize}
+\end{itemize}
+
+\section{Communication Asynchrone avec RabbitMQ}
+Pour garantir la résilience, les processus non critiques sont découplés via un Bus d'Événements.
+
+\textbf{Cas d'usage : La Notification de Réservation}
+\begin{enumerate}
+    \item Le `Booking Service` confirme une réservation.
+    \item Il publie un message sur l'échange `booking.exchange` avec la routing key `booking.confirmed`.
+    \item Le `Notification Service`, abonné à la queue correspondante, consomme le message.
+    \item Il construit un email HTML et l'envoie via SMTP (Gmail/SendGrid), sans ralentir le processus de réservation initial.
+\end{enumerate}
+
+\begin{lstlisting}[language=Java, caption=Exemple de Producteur RabbitMQ (Booking Service)]
+@Service
+public class BookingEventProducer {
+    private final RabbitTemplate rabbitTemplate;
+    
+    public void sendBookingConfirmedEvent(Booking booking) {
+        BookingEvent event = new BookingEvent(booking.getId(), booking.getUserEmail(), "CONFIRMED");
+        rabbitTemplate.convertAndSend("booking.exchange", "booking.confirmed", event);
+        log.info("Event sent for booking: {}", booking.getId());
+    }
+}
+\end{lstlisting}
+
+\section{Sécurité Avancée et API Gateway}
+L'\textbf{API Gateway} (Spring Cloud Gateway) est le point d'entrée unique. Elle implémente une sécurité en profondeur :
+\begin{itemize}
+    \item \textbf{Authentication Filter} : Intercepte chaque requête pour valider le Token JWT (signature et expiration) avant de la router.
+    \item \textbf{CORS Configuration} : Restreint l'accès aux seules origines autorisées (Frontend Next.js).
+    \item \textbf{Rate Limiting} : Protège les microservices contre les attaques DDoS en limitant le nombre de requêtes par IP.
+\end{itemize}
+
+% --- CHAPTER 4: FRONTEND DEVELOPMENT ---
+\chapter{Développement Frontend}
+
+L'interface utilisateur de \textit{Derent} a été conçue pour offrir une expérience fluide, masquant la complexité de la Blockchain derrière une ergonomie moderne.
+
+Conformément aux directives du projet, cette section présente les vues principales de l'application.
+
+\section{Interface Utilisateur (Screenshots)}
+
+\subsection{Page d'Accueil (Landing Page)}
+Point d'entrée de l'application, invitant l'utilisateur à explorer les biens ou à connecter son Wallet.
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.95\textwidth]{images/project_overview.png}} 
+    \caption{Page d'Accueil de la plateforme}
+\end{figure}
+
+
+
+\subsection{Catalogue des Biens (Listings)}
+Affichage des propriétés disponibles avec filtres et carte interactive.
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.95\textwidth]{images/frontned_listings.png}}
+    \caption{Liste des propriétés avec recherche géolocalisée}
+\end{figure}
+
+\subsection{Détail d'une Propriété \& Réservation}
+Vue détaillée permettant au locataire de voir les photos, les équipements et d'initier une transaction.
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.95\textwidth]{images/frontend_details.png}}
+    \caption{Page de détail d'un bien avec bouton de réservation Web3}
+\end{figure}
+
+% --- CHAPTER 5: BLOCKCHAIN INTEGRATION ---
+\chapter{Couche Blockchain}
+
+La confiance et la sécurité des transactions financières sont assurées par un \textbf{Smart Contract} personnalisé déployé sur Ethereum. Nous avons analysé en détail le code source du contrat \texttt{BookingPaymentContract.sol} situé dans le service Blockchain.
+
+\section{Analyse du Smart Contract : BookingPaymentContract}
+Ce contrat agit comme un tiers de confiance automatisé (Escrow). Il sécurise les fonds du locataire jusqu'à la fin de la location.
+
+\subsection{Structures de Données (State Variables)}
+Le contrat repose sur deux structures principales définissant l'état du système :
+
+\begin{lstlisting}[language=Java, caption=Struct Booking (Solidity)]
+struct Booking {
+    address guest;      // Adresse ETH du locataire
+    address host;       // Adresse ETH de l'hote
+    uint256 rentAmount; // Montant du loyer (en Wei)
+    uint256 depositAmount; // Caution (en Wei)
+    bool completed;     // Statut de la transaction
+    bool hasActiveReclamation; // Flag de litige
+    uint256 completedAt; // Timestamp de fin
+}
+\end{lstlisting}
+
+Le contrat maintient également des constantes critiques pour le modèle économique :
+\begin{itemize}
+    \item \texttt{PLATFORM\_FEE\_PERCENT = 10} : La plateforme prélève 10\% sur chaque transaction réussie.
+    \item \texttt{PLATFORM\_WALLET} : Adresse hardcodée recevant les commissions.
+\end{itemize}
+
+\subsection{Logique Transactionnelle}
+
+\subsubsection{1. Création et Paiement (\texttt{createBookingPayment})}
+Cette fonction est \texttt{payable}. Elle bloque les Ethers envoyés par le locataire dans le contrat.
+\begin{itemize}
+    \item \textbf{Validation} : Vérifie que \texttt{msg.value} correspond exactement à \texttt{rentAmount + depositAmount}.
+    \item \textbf{Intégrité} : Empêche l'hôte d'être son propre locataire (`host != tenant`).
+    \item \textbf{Événement} : Émet \texttt{BookingPaymentCreated} pour notifier le backend off-chain.
+\end{itemize}
+
+\subsubsection{2. Finalisation (\texttt{completeBooking})}
+Appelée à la fin du séjour si aucun litige n'est en cours.
+\begin{itemize}
+    \item \textbf{Distribution} :
+    \begin{itemize}
+        \item Calcule la commission : $Fee = Rent \times 10\%$.
+        \item Transfère le Loyer Net ($Rent - Fee$) à l'Hébergeur.
+        \item Transfère la Commission à la Plateforme.
+    \end{itemize}
+    \item La caution (\texttt{depositAmount}) reste virtuellement disponible pour être remboursée (géré par une logique de retrait séparée ou implicite selon le workflow de fin).
+\end{itemize}
+
+\subsubsection{3. Gestion des Litiges (\texttt{processReclamationRefund})}
+Fonction administrative (`onlyAdmin`) permettant de résoudre les conflits. Elle offre une granularité fine :
+\begin{itemize}
+    \item Peut rembourser le locataire (`refundAmount`) ou l'hôte.
+    \item Peut prélever une pénalité (`penaltyAmount`) vers la plateforme.
+    \item Met à jour l'état \texttt{hasActiveReclamation = false} pour débloquer le reste des fonds.
+\end{itemize}
+
+\section{Patterns de Sécurité Implémentés}
+L'analyse du code révèle l'utilisation de bonnes pratiques de sécurité Solidity :
+
+\begin{enumerate}
+    \item \textbf{Protection Anti-Reentrancy} :
+    Utilisation d'un modificateur \texttt{nonReentrant} avec un mutex booléen (\texttt{locked}) pour empêcher les attaques récursives lors des transferts d'Ether (`.call{value: ...}`).
+    
+    \item \textbf{Pattern Checks-Effects-Interactions} :
+    Le contrat met à jour l'état \\ (ex: \texttt{booking.completed = true}) \textit{avant} d'effectuer les transferts de fonds externes, minimisant les risques de manipulation.
+    
+    \item \textbf{Contrôle d'Accès (RBAC)} :
+    Le modificateur \texttt{onlyAdmin} restreint les fonctions sensibles (changement d'admin, résolution de litiges, retrait d'urgence) à l'adresse de déploiement.
+\end{enumerate}
+
+\section{Interaction Web3 avec MetaMask}
+
+L'intégration Web3 permet à l'utilisateur d'interagir directement avec le Smart Contract via son portefeuille Ethereum.  
+La bibliothèque \texttt{Ethers.js} est utilisée côté frontend pour établir la communication entre l'application décentralisée (dApp) et MetaMask.
+
+\subsection{Connexion du Wallet Ethereum}
+
+La Figure~\ref{fig:metamask-connect} illustre l'étape initiale où l'utilisateur connecte son portefeuille MetaMask à l'application.  
+Cette étape est indispensable pour récupérer l'adresse Ethereum de l'utilisateur et autoriser toute transaction on-chain.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.5\linewidth]{images/metamask_connect.png}}
+    \caption{Connexion de l'application au portefeuille MetaMask}
+    \label{fig:metamask-connect}
+\end{figure}
+
+\subsection{Confirmation du Paiement et Wallet Actif}
+
+Après la sélection du bien et la validation de la réservation, l'utilisateur accède à la page de confirmation du paiement.  
+La Figure~\ref{fig:confirm-pay} montre l'affichage du montant total à payer ainsi que l'adresse du wallet actuellement connecté via MetaMask, garantissant la transparence de l'opération.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\linewidth]{images/confirm_and_pay.png}}
+    \caption{Page de confirmation et paiement avec wallet MetaMask connecté}
+    \label{fig:confirm-pay}
+\end{figure}
+
+\subsection{Validation de la Transaction dans MetaMask}
+
+Lors du paiement, MetaMask génère une demande de transaction Ethereum.  
+Comme illustré dans la Figure~\ref{fig:metamask-tx}, l'utilisateur doit confirmer le transfert d'Ether incluant le montant.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\linewidth]{images/metamask_transaction.png}}
+    \caption{Demande de transfert Ethereum dans MetaMask}
+    \label{fig:metamask-tx}
+\end{figure}
+
+
+% --- CHAPTER 6: ARTIFICIAL INTELLIGENCE ---
+\chapter{Intelligence Artificielle \& Data Science}
+
+Le cœur technologique de \textit{Derent} réside dans son moteur d'intelligence artificielle, conçu pour apporter transparence et sécurité au marché locatif. Ce chapitre détaille le pipeline technique complet, de la collecte de données massive au déploiement de modèles de Machine Learning avancés.
+
+Contrairement aux solutions standards, nous avons développé nos propres datasets et algorithmes "maison", validés par une méthodologie rigoureuse.
+
+\section{Modèle Phare : Prédiction Dynamique des Prix}
+Ce module ("Price Suggestion AI") assiste les hébergeurs en suggérant le prix optimal par nuit pour maximiser leurs revenus tout en restant compétitifs. C'est le résultat d'un projet de Data Science complet détaillé dans le rapport technique associé (\textit{Morocco Airbnb Rental Price Prediction}).
+
+\subsection{Collecte de Données (Web Scraping)}
+Faute d'API publique, nous avons construit un pipeline d'extraction de données personnalisé :
+\begin{itemize}
+    \item \textbf{Cible} : 13 villes majeures du Maroc (Casablanca, Marrakech, Tanger, Rabat, Agadir, etc.).
+    \item \textbf{Volume} : Scraping de \textbf{65 988 annonces} uniques sur 4 saisons (Printemps, Été, Automne, Hiver 2025).
+    \item \textbf{Outil} : Librairie Python \texttt{pyairbnb} pour l'extraction de 290 fichiers JSON bruts.
+\end{itemize}
+
+\subsection{Pipeline ETL \& Feature Engineering}
+Les données brutes ont subi un nettoyage intensif via le script \texttt{json\_to\_csv\_pipeline.py} :
+\begin{enumerate}
+    \item \textbf{Nettoyage} : Suppression des duplicatas et filtrage des outliers (prix > 10 000 MAD).
+    \item \textbf{Feature Engineering (44 variables)} :
+    \begin{itemize}
+        \item \textbf{Géo-spatial} : Encodage des quartiers (\texttt{city\_tier}) et coordonnées GPS.
+        \item \textbf{Temporel} : Création de flags comme \texttt{is\_peak\_season} ou \texttt{season\_summer}.
+        \item \textbf{Propriété} : Agrégation via \texttt{size\_category} (Maison, Villa, Appartement) et détection du standing (\texttt{is\_luxury}).
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Modélisation et Optimisation (XGBoost)}
+Nous avons comparé plusieurs approches (Régression Linéaire, Random Forest) avant de sélectionner \textbf{XGBoost} pour ses performances supérieures.
+
+\textbf{Stratégie d'Optimisation :}
+\begin{itemize}
+    \item \textbf{Random Search} : Exploration large de 100 combinaisons d'hyperparamètres.
+    \item \textbf{Grid Search} : Affinage précis sur les meilleurs paramètres identifiés.
+    \item \textbf{Configuration Finale} : 
+    \begin{itemize}
+        \item \texttt{n\_estimators=725}, \texttt{learning\_rate=0.05} (pour la stabilité).
+        \item \texttt{max\_depth=8} (capture des interactions complexes ville/saison).
+    \end{itemize}
+\end{itemize}
+
+\textbf{Résultats :}
+Le modèle final atteint une erreur moyenne absolue (\textbf{MAE}) de \textbf{48.55 MAD} (\textasciitilde 4.5€) et explique plus de \textbf{91\% de la variance} des prix (R² = 0.9142), surpassant largement le modèle Random Forest de base.
+
+\section{Autres Modules Intelligents}
+
+\subsection{Score de Risque Locataire (Tenant Risk Scoring)}
+Ce modèle de classification binaire évalue la probabilité de défaut de paiement ou de litige.
+\begin{itemize}
+    \item \textbf{Algorithme} : Random Forest Classifier (optimisé pour gérer le déséquilibre des classes via \texttt{class\_weight='balanced'}).
+    \item \textbf{Inputs} : Historique des transactions (échecs/succès), ancienneté du compte, réclamations passées.
+    \item \textbf{Output} : Score de 0 à 100 affiché aux hôtes ("Confiance Élevée", "Risque Modéré").
+\end{itemize}
+
+\subsection{Segmentation de Marché (Clustering)}
+Utilise l'algorithme \textbf{K-Means} non supervisé pour grouper les propriétés similaires. Cela alimente le moteur de recommandation ("Biens similaires"). L'algorithme maximise le \textbf{Silhouette Score} pour déterminer automatiquement le nombre optimal de segments de marché.
+
+\subsection{Tendances du Marché (Market Trends)}
+Un module d'analyse de séries temporelles (Régression Linéaire via \texttt{np.polyfit}) qui détecte les dynamiques de marché :
+\begin{itemize}
+    \item Identification de la tendance (Hausse/Baisse).
+    \item Détection de la saisonnalité et des pics de demande par ville.
+\end{itemize}
+
+\section{Intégration dans l'Application (Screenshots)}
+
+L'IA n'est pas une "boite noire" cachée, mais une fonctionnalité visible qui apporte de la valeur à chaque étape du parcours utilisateur.
+
+\subsection{Hôte : Suggestion de Prix Intelligente}
+Lors de la création d'une annonce, l'IA remplit automatiquement le prix suggéré en fonction des caractéristiques saisies.
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth]{images/ai_price_prediction_ui.png}}
+    \caption{Module de suggestion de prix : L'IA propose 466 MAD/nuit.}
+\end{figure}
+
+\subsection{Hôte : Analyse de Risque Locataire}
+Avant d'accepter une réservation, l'hôte voit un score de confiance calculé par le modèle de risque.
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.8\textwidth]{images/ai_risk_score_ui.png}}
+    \caption{Dashboard Hôte : Indicateur de fiabilité du locataire (Score Vert/Orange/Rouge).}
+\end{figure}
+
+\newpage
+\subsection{Investisseur : Tableau de Bord du Marché}
+Visualisation des tendances calculées par le module Market Trends.
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{images/ai_market_dashboard.png}}
+    \caption{Market Insights : Courbes de tendance des prix et taux d'occupation par ville.}
+\end{figure}
+
+\subsection{Locataire : Recommandations Personnalisées}
+Le clustering permet de proposer des biens alternatifs pertinents.
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.9\textwidth]{images/ai_similar_listings.png}}
+    \caption{Moteur de recommandation "Based on..." basé sur le clustering K-Means.}
+\end{figure}
+
+% --- CHAPTER 7: DEVOPS & CI/CD ---
+\chapter{DevOps \& CI/CD}
+
+L'industrialisation du développement est au cœur du projet \textit{Derent}. Nous avons adopté une approche DevOps stricte pour garantir la qualité du code, la sécurité des livrables et la rapidité des déploiements.
+
+L'ensemble de nos pipelines est défini "as code" via des \textbf{Jenkinsfiles}, stockés directement dans les dépôts Git de chaque microservice.
+
+\section{Orchestration Globale}
+Pour gérer la complexité de nos 10 microservices, nous avons mis en place un orchestrateur global nommé \textbf{Master of Pipeline} (`Jenkinsfile.orchestrator`).
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.5cm,
+        auto,
+        block/.style={
+            rectangle, 
+            draw=blue!40, 
+            fill=blue!5, 
+            text width=2.5cm, 
+            text centered, 
+            rounded corners, 
+            minimum height=1.2cm,
+            drop shadow
+        },
+        line/.style={draw, -latex', thick},
+        cloud/.style={draw, ellipse, fill=red!10, node distance=2cm, minimum height=1em}
+    ]
+        % Nodes
+        \node [cloud] (start) {Start Orchestrator};
+        \node [block, below of=start, node distance=2cm] (parallel) {Parallel Execution Block};
+        
+        \node [block, below left=1.5cm and 2cm of parallel] (user) {User Service};
+        \node [block, right=0.3cm of user] (property) {Property Service};
+        \node [block, right=0.3cm of property] (ai) {AI Service};
+        \node [block, right=0.3cm of ai] (others) {Other Services...};
+        
+        \node [block, below=2cm of property] (deploy) {System Deployment};
+        \node [cloud, below of=deploy] (end) {End};
+
+        % Lines
+        \path [line] (start) -- (parallel);
+        \path [line] (parallel) -- (user);
+        \path [line] (parallel) -- (property);
+        \path [line] (parallel) -- (ai);
+        \path [line] (parallel) -- (others);
+        
+        \path [line] (user) -- (deploy);
+        \path [line] (property) -- (deploy);
+        \path [line] (ai) -- (deploy);
+        \path [line] (others) -- (deploy);
+        
+        \path [line] (deploy) -- (end);
+    \end{tikzpicture}
+    \caption{Flux d'Orchestration Global : Exécution Parallèle}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{images/jenkins.png}}
+    \caption{Vue d'ensemble Jenkins : Tous les pipelines (Backend, Frontend, IA)}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Parallélisme} : Le pipeline lance la construction de tous les services (User, Booking, Property, Blockchain, AI, Frontend) en parallèle pour réduire le temps de feedback.
+    \item \textbf{Indépendance} : L'échec d'un service non critique ne bloque pas nécessairement les autres, bien que le build global soit marqué en erreur.
+\end{itemize}
+
+\section{Pipeline Standard (Backend Java)}
+Chaque microservice Spring Boot (ex: \texttt{user-service}) suit un cycle de vie standardisé en 7 étapes :
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=0.8cm,
+        auto,
+        processnode/.style={
+            rectangle, 
+            draw=black, 
+            fill=green!10, 
+            text width=3cm, 
+            text centered, 
+            minimum height=1cm
+        },
+        arrow/.style={draw, -latex, thick}
+    ]
+        \node [processnode] (checkout) {1. Checkout \& Verify};
+        \node [processnode, right=0.5cm of checkout] (build) {2. Maven Build \& Test};
+        \node [processnode, right=0.5cm of build] (sonar) {3. SonarQube Scan};
+        
+        \node [processnode, below=0.8cm of checkout] (docker) {4. Docker Build};
+        \node [processnode, right=0.5cm of docker] (push) {5. Docker Push};
+        
+        \path [arrow] (checkout) -- (build);
+        \path [arrow] (build) -- (sonar);
+        \path [arrow] (sonar) -- +(0,-0.8) -| (docker); % Path down and left
+        \path [arrow] (docker) -- (push);
+    \end{tikzpicture}
+    \caption{Pipeline Standard pour Microservices Java}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{images/sonarqube.png}}
+    \caption{SonarQube : Analyse de la qualité et couverture de code}
+\end{figure}
+
+\begin{enumerate}
+    \item \textbf{Checkout \& Vérification} : Récupération du code et validation de la structure du projet (présence du \texttt{pom.xml}).
+    \item \textbf{Build \& Test} : Compilation avec Maven et exécution des tests unitaires (`mvn clean package`).
+    \item \textbf{Qualité de Code (SonarQube)} : Analyse statique pour détecter les "Code Smells" et bugs potentiels. Le pipeline s'arrête si le "Quality Gate" n'est pas respecté.
+    \item \textbf{Dockerisation via Multi-Stage Build} :
+    \begin{itemize}
+        \item \textit{Stage 1 (Builder)} : Image Maven pour compiler le projet.
+        \item \textit{Stage 2 (Runtime)} : Image JRE légère (`eclipse-temurin:17-jre-alpine`) pour l'exécution.
+        \item \textit{Sécurité} : Création d'un utilisateur non-root (`appuser`) pour l'exécution du conteneur.
+    \end{itemize}
+    \item \textbf{Push au Registre} : Envoi de l'image tagguée (hash du commit) vers Docker Hub et le registre local.
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \scalebox{0.85}{
+    \begin{tikzpicture}[
+        node distance=0.6cm,
+        auto,
+        processnode/.style={
+            rectangle, 
+            draw=orange!60, 
+            fill=orange!5, 
+            text width=3.5cm, 
+            text centered, 
+            rounded corners,
+            minimum height=1cm
+        },
+        arrow/.style={draw, -latex, thick}
+    ]
+        \node [processnode] (lfs) {1. Git LFS Pull (Models)};
+        \node [processnode, right=0.5cm of lfs] (security) {2. Security Scan (Bandit)};
+        \node [processnode, right=0.5cm of security] (validate) {3. Model Validation};
+        
+        \node [processnode, below=0.8cm of lfs] (test) {4. Container Integration Test};
+        \node [processnode, right=0.5cm of test] (build) {5. Docker Build};
+        \node [processnode, right=0.5cm of build] (deploy) {6. Push Registry};
+        
+        \path [arrow] (lfs) -- (security);
+        \path [arrow] (security) -- (validate);
+        \path [arrow] (validate) -- +(0,-0.8) -| (test);
+        \path [arrow] (test) -- (build);
+        \path [arrow] (build) -- (deploy);
+    \end{tikzpicture}
+    }
+    \caption{Flux CI/CD Avancé pour l'IA}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=1\textwidth]{images/dockerhub_repository.png}}
+    \caption{Docker Hub : Repository public hébergeant les images multi-arch}
+\end{figure}
+
+\begin{enumerate}
+    \item \textbf{Gestion des Gros Fichiers (Git LFS)} : Le pipeline gère l'authentification Git LFS pour récupérer les modèles entraînés (`.pkl`) qui dépassent 100 Mo.
+    \item \textbf{Scan de Sécurité (Bandit \& Safety)} :
+    \begin{itemize}
+        \item \texttt{bandit} : Analyse le code Python pour détecter des failles de sécurité.
+        \item \texttt{safety} : Vérifie les dépendances (`requirements.txt`) contre une base de vulnérabilités connues (CVE).
+    \end{itemize}
+    \item \textbf{Validation du Modèle} : Un script Python charge le modèle `.pkl` pour vérifier son intégrité et s'assurer qu'il possède bien une méthode `predict()` avant de construire l'image.
+    \item \textbf{Test du Conteneur} : Contrairement aux autres services, nous lançons le conteneur IA dans le pipeline pour tester ses endpoints (`/health`, `/predict`) avec de vraies requêtes HTTP avant la validation finale.
+\end{enumerate}
+
+% --- CHAPTER 8: ORCHESTRATION (KUBERNETES) ---
+\chapter{Orchestration Kubernetes}
+
+Pour gérer le déploiement de nos 10 microservices, nous utilisons \textbf{Kubernetes}, le standard de l'industrie pour l'orchestration de conteneurs. En phase de développement, nous utilisons \textbf{Minikube} pour simuler un cluster mono-nœud local.
+
+\section{Architecture du Cluster}
+L'ensemble des ressources est défini dans le dossier `Master/k8s`, suivant une structure numérotée pour un déploiement ordonné :
+
+\begin{itemize}
+    \item \textbf{00-04 (Base)} : `Namespace`, `Secrets` (mots de passe chiffrés en base64), `ConfigMaps`, et l'infrastructure de données (`PostgreSQL`, `RabbitMQ`).
+    \item \textbf{10-17 (Services Backend)} : Déploiements des microservices (User, Property, AI, etc.) exposés via des services \textbf{ClusterIP} (le trafic reste interne au cluster).
+    \item \textbf{20-30 (Exposition)} : L'`API Gateway` et le `Frontend` sont exposés via \textbf{NodePort} pour être accessibles depuis l'hôte.
+    \item \textbf{40+ (Monitoring)} : Stack d'observabilité complète avec Prometheus et Grafana.
+\end{itemize}
+
+\section{Déploiement et Opérations}
+
+\subsection{État du Cluster (Pods)}
+La commande `kubectl get pods` confirme que tous les composants sont en état `Running`. On observe une séparation claire entre les services métiers, les bases de données et les outils de monitoring.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.95\textwidth]{images/k8s_get_pods.png}}
+    \caption{Liste des Pods actifs dans le namespace 'derent-ns'}
+\end{figure}
+
+\subsection{Exposition des Services (NodePort)}
+Minikube expose une IP locale (`192.168.49.2`) permettant d'accéder aux services NodePort :
+\begin{itemize}
+    \item \textbf{Frontend} : Port \textbf{30000} (Access via navigateur).
+    \item \textbf{API Gateway} : Port \textbf{30090} (Point d'entrée pour les requêtes API).
+    \item \textbf{Grafana} : Port \textbf{30092}.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.95\textwidth]{images/k8s_minikube_services.png}}
+    \caption{Liste des services exposés et URLs d'accès (Minikube Dashboard)}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.95\textwidth]{images/k8s_pod_30000.png}}
+    \caption{Accès réussi au Frontend via le Port 30000 (Forwarding)}
+\end{figure}
+
+\section{Observabilité et Monitoring}
+Un cluster distribué nécessite une visibilité accrue. Nous avons déployé une stack de monitoring :
+
+\subsection{Prometheus (Métriques)}
+Scrape les métriques techniques (CPU, RAM, JVM) exposées par les endpoints `/actuator/prometheus` des services Spring Boot.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.95\textwidth]{images/k8s_prometheus.png}}
+    \caption{Interface Prometheus : Requête sur l'état des cibles (Targets)}
+\end{figure}
+
+\subsection{Grafana (Visualisation)}
+Tableaux de bord connectés à Prometheus pour visualiser la santé du cluster en temps réel.
+
+\begin{figure}[H]
+    \centering
+    \fbox{\includegraphics[width=0.95\textwidth]{images/k8s_grafana.png}}
+    \caption{Dashboard Grafana : Métriques système et applicatives}
+\end{figure}
+
+% --- CHAPTER 9: CLOUD INFRASTRUCTURE (AWS) ---
+\chapter{Infrastructure Cloud (AWS)}
+
+Pour le déploiement en production, nous visons le cloud \textbf{Amazon Web Services (AWS)} avec une approche \textit{Infrastructure as Code} (IaC) utilisant \textbf{Terraform}. Cela garantit une infrastructure reproductible, versionnée et sécurisée.
+
+\section{Architecture Modulaire Terraform}
+L'infrastructure est définie dans le dossier `Master/terraform` et découpée en modules réutilisables pour chaque composant critique :
+
+\begin{itemize}
+    \item \textbf{VPC (Network)} : Un réseau isolé (`10.0.0.0/16`) avec 3 sous-réseaux publics (pour les Load Balancers) et 3 sous-réseaux privés (pour les nœuds EKS et les bases de données) répartis sur plusieurs zones de disponibilité (AZ).
+    \item \textbf{EKS (Compute)} : Cluster Kubernetes managé. Les nœuds de travail (Worker Nodes) sont placés dans les sous-réseaux privés pour la sécurité, et ne sont accessibles que via l'ALB (Application Load Balancer).
+    \item \textbf{RDS (Database)} : Instance PostgreSQL managée, configurée avec des sauvegardes automatiques et le mode Multi-AZ pour garantir la haute disponibilité et la tolérance aux pannes.
+    \item \textbf{ECR (Registry)} : Registres privés pour stocker de manière sécurisée les images Docker de nos microservices, générées par la pipeline CI/CD.
+    \item \textbf{S3 (Storage)} : Stockage objet durable et scalable pour les assets statiques, notamment les images des propriétés et les justificatifs des réclamations.
+\end{itemize}
+
+\section{Schéma d'Architecture Cible}
+
+L'architecture déployée respecte les bonnes pratiques AWS Well-Architected Framework :
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=1.5cm,
+        auto,
+        region/.style={draw, dashed, fill=gray!5, rectangle, rounded corners, minimum width=12cm, minimum height=7cm, label={[anchor=north west]north west:AWS Region (eu-west-3)}},
+        vpc/.style={draw, fill=white, rectangle, rounded corners, minimum width=11cm, minimum height=6cm, label={[anchor=north west]north west:VPC (10.0.0.0/16)}},
+        subnet/.style={draw, fill=blue!5, rectangle, rounded corners, minimum width=4cm, minimum height=4cm},
+        service/.style={draw, fill=orange!20, rectangle, rounded corners, text centered, minimum height=1cm, minimum width=2.5cm, drop shadow},
+        db/.style={draw, fill=green!20, cylinder, shape border rotate=90, aspect=0.25, text centered, minimum height=1cm, minimum width=1.5cm, drop shadow}
+    ]
+        \node [region] (Region) {};
+        \node [vpc, below right=0.5cm and 0.5cm of Region.north west] (VPC) {};
+        
+        % Public Subnet
+        \node [subnet, label={[anchor=north]north:Public Subnet}, right=0.5cm of VPC.west] (Public) {};
+        \node [service, below=0.5cm of Public.north] (ALB) {ALB (Ingress)};
+        \node [service, below=0.5cm of ALB] (Nat) {NAT Gateway};
+        
+        % Private Subnet
+        \node [subnet, label={[anchor=north]north:Private Subnet}, right=1cm of Public] (Private) {};
+        \node [service, below=0.5cm of Private.north] (EKS) {EKS Nodes (App)};
+        \node [db, below=0.5cm of EKS] (RDS) {RDS (PostgreSQL)};
+
+        % External
+        \node [draw, fill=white, below=1cm of Region] (Users) {Users / Internet};
+        
+        % Connections
+        \draw [->, thick] (Users) -- (ALB);
+        \draw [->, thick] (ALB) -- (EKS);
+        \draw [->, thick] (EKS) -- (RDS);
+        \draw [->, dashed] (EKS) -- (Nat);
+    \end{tikzpicture}
+    \caption{Architecture Cloud AWS Cible (Production)}
+\end{figure}
+
+\chapter{Conclusion}
+
+Ce projet a permis de réaliser une plateforme de location immobilière innovante, alliant la robustesse des Microservices, la sécurité de la Blockchain et l'intelligence de l'IA.
+
+\section{Réalisations Clés}
+\begin{itemize}
+    \item Une architecture distribuée et résiliente.
+    \item Une expérience utilisateur fluide grâce à Next.js et une intégration Web3 transparente.
+    \item Une chaîne DevOps complète (CI/CD, IaC) garantissant la qualité et la rapidité des déploiements.
+\end{itemize}
+
+\section{Perspectives}
+Pour l'avenir, nous envisageons :
+\begin{itemize}
+    \item Le déploiement sur le Mainnet Ethereum (ou un Layer 2 comme Polygon pour réduire les coûts).
+    \item L'amélioration des modèles IA avec plus de données réelles.
+    \item L'intégration d'un système de messagerie temps réel (Chat) entre locataire et hôte.
+\end{itemize}
+
+\end{document}
