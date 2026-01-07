@@ -1,0 +1,274 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{makecell}
+
+% Page Geometry
+\geometry{top=2cm, bottom=2cm, left=2cm, right=2cm}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[L]{\small Derent - Decentralized Real Estate Rental dApp}
+\fancyfoot[R]{\thepage}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0pt}
+
+% Colors
+\definecolor{primaryBlue}{RGB}{0, 102, 204}
+
+% Hyperlink Setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=primaryBlue,
+}
+
+\begin{document}
+
+%---------------------------------
+% Page de garde
+%---------------------------------
+\begin{titlepage}
+    \centering
+
+    % --- Logos ---
+    \makebox[\textwidth][s]{%
+        \includegraphics[height=2.5cm]{images/logo_right.png}\hfill
+        \includegraphics[height=2.6cm]{images/logo_left.png}
+    }
+
+    \vspace{2cm}
+
+    {\large \textbf{Université Abdelmalek Essaâdi}}\\
+    {\large \textbf{Faculté des Sciences et Techniques de Tanger}}\\
+    {\large \textbf{Département Génie Informatique}}\\
+
+    \vspace{2cm}
+
+    \rule{\linewidth}{0.6mm}\\[0.3cm]
+    {\huge\textbf{README - Rapport Synthétique}}\\[0.2cm]
+    {\Large\textbf{Derent : Location Immobilière Décentralisée}}\\[0.3cm]
+    \rule{\linewidth}{0.5mm}
+
+    \vspace{0.8cm}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.6\linewidth]{images/logo.png}
+    \end{figure}
+
+    \vspace{2cm}
+    
+    \noindent
+    \begin{minipage}[t]{0.48\textwidth}
+        \raggedright
+        {\large \textbf{Réalisé par :}}\\[0.3cm]
+        \normalsize
+        El Gorrim Mohamed\\
+        Kchibal Ismail\\
+        Mohand Omar Moussa\\
+        Essalhi Salma\\
+        El Azzouzi Achraf
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.48\textwidth}
+        \raggedleft
+        {\large \textbf{Encadré par :}}\\[0.3cm]
+        \normalsize
+        M. Lotfi El Aachak
+    \end{minipage}
+
+    \vspace{3cm}
+
+    {\large Cycle Ingénieur – Logiciels et Systèmes Intelligents}\\[0.2cm]
+    {\large Année Universitaire 2025–2026}\\
+
+\end{titlepage}
+
+%---------------------------------
+% Composition de l'Équipe
+%---------------------------------
+\section*{Composition de l'Équipe}
+
+Ce projet repose sur une équipe multidisciplinaire de 5 ingénieurs, chacun expert dans son domaine technologique.
+
+\vspace{0.5cm}
+
+\renewcommand{\arraystretch}{1.8}
+
+\begin{center}
+\begin{longtable}{|
+    >{\centering\arraybackslash}m{2.5cm} |
+    m{4.7cm} |
+    m{8cm} |
+}
+\hline
+\textbf{Photo} & \textbf{Membre \& Rôle} & \textbf{Responsabilités Clés} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{Photo} & \textbf{Membre \& Rôle} & \textbf{Responsabilités Clés} \\
+\hline
+\endhead
+
+%------------------- Achraf -------------------
+\centering
+\includegraphics[width=2.2cm,height=1.8cm,keepaspectratio]{images/achraf.jpeg}
+&
+\makecell[l]{\textbf{El Azzouzi Achraf}\\ \textit{Backend Engineer}}
+&
+\textbf{Core Development} : Microservices avec \textbf{Spring Boot 3}. \newline
+\textbf{API Design} : APIs RESTful et communication via \textbf{RabbitMQ}. \newline
+\textbf{Data Layer} : Base de données \textbf{PostgreSQL} + Hibernate. \\
+\hline
+
+%------------------- Salma -------------------
+\centering
+\includegraphics[width=2.2cm,height=1.8cm,keepaspectratio]{images/salma.jpeg}
+&
+\makecell[l]{\textbf{Essalhi Salma}\\ \textit{Frontend Engineer}}
+&
+\textbf{UX/UI} : Interface réactive avec \textbf{Next.js} et \textbf{Tailwind CSS}. \newline
+\textbf{Web3} : Connexion wallets (MetaMask) via \textbf{Ethers.js}. \newline
+\textbf{Mapping} : Cartes interactives pour localisation des biens. \\
+\hline
+
+%------------------- Moussa -------------------
+\centering
+\includegraphics[width=2.2cm,height=1.8cm,keepaspectratio]{images/moussa.jpeg}
+&
+\makecell[l]{\textbf{Mohand Omar Moussa}\\ \textit{Blockchain Engineer}}
+&
+\textbf{Smart Contracts} : Développement en \textbf{Solidity} (location + escrow). \newline
+\textbf{Testing} : Tests unitaires avec \textbf{Hardhat} + audit \textbf{Slither}. \newline
+\textbf{Deployment} : Migrations sur Testnets Ethereum. \\
+\hline
+
+%------------------- Mohamed -------------------
+\centering
+\includegraphics[width=2.2cm,height=1.8cm,keepaspectratio]{images/mohamed.jpg}
+&
+\makecell[l]{\textbf{El Gorrim Mohamed}\\ \textit{DevOps / AI Engineer}}
+&
+\textbf{CI/CD} : Pipelines avec \textbf{Jenkins} et \textbf{Docker}. \newline
+\textbf{Orchestration} : Clusters \textbf{Kubernetes (K8s)}. \newline
+\textbf{AI Models} : ML pour \textit{Dynamic Pricing}, \textit{Risk Scoring}, \textit{Property Recommendation} et \textit{Market Trends} . \newline
+\textbf{Organization} : Création et gestion de l'organisation GitHub. \\
+\hline
+
+%------------------- Ismail -------------------
+\centering
+\includegraphics[width=2.2cm,height=1.8cm,keepaspectratio]{images/kchibal.jpeg}
+&
+\makecell[l]{\textbf{Kchibal Ismail}\\ \textit{Cloud Engineer}}
+&
+\textbf{IaC} : Infrastructure \textbf{AWS} via \textbf{Terraform}. \newline
+\textbf{Networking} : VPC, subnets et load balancers. \newline
+\textbf{Storage} : \textbf{S3} et registres \textbf{ECR}. \\
+\hline
+
+\end{longtable}
+\end{center}
+
+\newpage
+
+%---------------------------------
+% Pipelines CI/CD
+%---------------------------------
+\section*{Pipelines CI/CD Jenkins}
+
+L'automatisation du déploiement est assurée par des pipelines Jenkins dédiés à chaque composant.
+
+\subsection*{Pipeline Backend (API Gateway / Microservices)}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/backend_pipeline.png}
+    \caption{Pipeline CI/CD pour les microservices Spring Boot}
+\end{figure}
+
+\subsection*{Pipeline Frontend (Next.js)}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/frontend_pipeline.png}
+    \caption{Pipeline CI/CD pour l'application Next.js}
+\end{figure}
+
+\subsection*{Pipeline AI/ML (Pricing API)}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/ai_pipeline.png}
+    \caption{Pipeline CI/CD pour le service de tarification IA}
+\end{figure}
+
+%---------------------------------
+% Architecture Cloud AWS
+%---------------------------------
+\section*{Architecture Cloud AWS}
+
+L'infrastructure est déployée sur AWS avec une architecture Cloud Native orchestrée par Kubernetes (EKS).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/cloud_architecture.png}
+    \caption{Architecture AWS : VPC, EKS, CloudFront, ALB, ECR, S3}
+\end{figure}
+
+\vspace{0.5cm}
+
+\textbf{Composants principaux :}
+\begin{itemize}
+    \item \textbf{VPC 10.0.0.0/16} : Isolation réseau avec subnets publics/privés
+    \item \textbf{EKS 1.30} : Cluster Kubernetes managé (Node Group t3.medium)
+    \item \textbf{CloudFront} : CDN pour Frontend, API et Blockchain RPC
+    \item \textbf{ALB} : Load balancers pour routage du trafic
+    \item \textbf{ECR} : Registre des images Docker
+    \item \textbf{S3} : Stockage des médias et uploads
+    \item \textbf{ACM + Route 53} : Certificats SSL et DNS
+\end{itemize}
+
+\vspace{1cm}
+
+%---------------------------------
+% Vue d'ensemble du projet
+%---------------------------------
+\section*{Vue d'ensemble du projet}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\linewidth]{images/project_overview.png}
+    \caption{Vue d'ensemble globale du projet Derent}
+\end{figure}
+
+%---------------------------------
+% Lien vers documentation complète
+%---------------------------------
+\section*{Documentation Complète}
+
+\begin{center}
+\fbox{
+\parbox{0.9\textwidth}{
+\centering
+\vspace{0.3cm}
+Pour le rapport détaillé complet avec toutes les spécifications techniques, \\
+consultez le dépôt de documentation officiel :\\[0.3cm]
+\large\textbf{\url{https://github.com/DApp-for-Real-Estate-Rental-on-Ethereum/documentations-reports}}
+\vspace{0.3cm}
+}
+}
+\end{center}
+
+\end{document}
