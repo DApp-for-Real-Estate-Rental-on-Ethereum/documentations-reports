@@ -3,6 +3,7 @@
 % Packages
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern} % Modern Latin fonts for better PDF rendering
 \usepackage[french]{babel} % Changed to French
 \usepackage{graphicx}
 \usepackage{geometry}
@@ -1090,21 +1091,30 @@ L'architecture déployée respecte les bonnes pratiques AWS Well-Architected Fra
 
 \chapter{Conclusion}
 
-Ce projet a permis de réaliser une plateforme de location immobilière innovante, alliant la robustesse des Microservices, la sécurité de la Blockchain et l'intelligence de l'IA.
+Ce projet a permis de réaliser une plateforme de location immobilière innovante, alliant la robustesse des microservices, la sécurité de la blockchain et l'intelligence de l'IA. L'implémentation actuelle est déployée en production sur AWS :
+\begin{itemize}
+    \item Frontend Next.js diffusé via \textbf{CloudFront} en HTTPS, adossé à un service \textbf{EKS} exposé par un Load Balancer.
+    \item API Gateway Spring Cloud sur \textbf{EKS}, servie derrière CloudFront (TLS de bout en bout) et connectée aux microservices internes (User, Booking, Property, Payment, Notification, Reclamation).
+    \item \textbf{Blockchain Service} exposé en HTTPS via CloudFront pour MetaMask (RPC sécurisé), avec déploiements Hardhat.
+    \item Stockage \textbf{S3} pour les médias (photos, pièces jointes) et registre \textbf{ECR} pour toutes les images Docker produites par la CI/CD Jenkins.
+    \item Supervision Prometheus/Grafana et logs Kubernetes pour l'observabilité continue.
+\end{itemize}
 
 \section{Réalisations Clés}
 \begin{itemize}
-    \item Une architecture distribuée et résiliente.
-    \item Une expérience utilisateur fluide grâce à Next.js et une intégration Web3 transparente.
-    \item Une chaîne DevOps complète (CI/CD, IaC) garantissant la qualité et la rapidité des déploiements.
+    \item Architecture distribuée et résiliente sur \textbf{EKS}, découplée par microservices et sécurisée par le Gateway.
+    \item Chaîne \textbf{CI/CD Jenkins} vers \textbf{ECR} et déploiements Kubernetes automatisés, pilotés par IaC (Terraform) pour l'infra AWS.
+    \item Expérience utilisateur fluide (Next.js, Tailwind) avec intégration Web3 (MetaMask) et module IA de suggestion de prix.
+    \item Exposition sécurisée via \textbf{CloudFront} (frontend, API, RPC) avec certificats TLS et CORS maîtrisé.
 \end{itemize}
 
 \section{Perspectives}
 Pour l'avenir, nous envisageons :
 \begin{itemize}
-    \item Le déploiement sur le Mainnet Ethereum (ou un Layer 2 comme Polygon pour réduire les coûts).
-    \item L'amélioration des modèles IA avec plus de données réelles.
-    \item L'intégration d'un système de messagerie temps réel (Chat) entre locataire et hôte.
+    \item Passage au \textbf{Mainnet} ou à un \textbf{Layer 2} (ex. Polygon) pour réduire les coûts de gas.
+    \item Enrichissement des modèles IA avec des données réelles et déploiement A/B pour affiner la précision.
+    \item Ajout d'une messagerie temps réel (WebSocket) et d'alertes push pour renforcer l'engagement utilisateur.
+    \item Renforcement de la résilience multi-région (réplication S3, RDS cross-AZ) et mise en place d'un WAF devant CloudFront.
 \end{itemize}
 
 \end{document}
